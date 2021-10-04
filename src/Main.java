@@ -176,8 +176,4 @@ public class Main {
             System.out.println(FOUND_EQUAL);
         else System.out.println(ALL_DIFFERENT);
     }
-
-
-
-
 }
