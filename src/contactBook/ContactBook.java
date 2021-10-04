@@ -114,8 +114,10 @@ public class ContactBook {
     public String getContactName(int phone) {
         String n = "";
         for(int i = 0; i < counter; i++)
-            if(contacts[i].getPhone() == phone)
+            if(contacts[i].getPhone() == phone) {
                 n = contacts[i].getName();
+                return n;
+            }
         return n;
     }
 
@@ -124,7 +126,7 @@ public class ContactBook {
         int i;
         for(i = 0; i < counter; i++)
             toCompare = contacts[i];
-        for( int j = i + 1; j < counter; j++)
+        for(int j = i; j < counter; j++)
             if(toCompare.getPhone() == contacts[j].getPhone())
                 return true;
         return false;
