@@ -26,9 +26,11 @@ public class Main {
     public static final String CONTACT_UPDATED = "Contact updated.";
     public static final String BOOK_EMPTY = "Contact book empty.";
     public static final String PHONE_NOT_EXISTS = "Phone number does not exist.";
-    public static final String ALL_DIFFERENT = "All contacts have different phone numbers.";
     public static final String QUIT_MSG = "Goodbye!";
     public static final String COMMAND_ERROR = "Unknown command.";
+    //New messages
+    public static final String FOUND_EQUAL = "There are contacts that share phone numbers.";
+    public static final String ALL_DIFFERENT = "All contacts have different phone numbers.";
 
     public static void main(String[] args) {
         Scanner in = new Scanner(System.in);
@@ -59,10 +61,10 @@ public class Main {
                     listAllContacts(cBook);
                     break;
                 case GET_NAME:
-                    //...
+                    getContactName(in,cBook);
                     break;
                 case EXISTS_PHONE:
-                    //...
+                    checkRepeated(cBook);
                     break;
                 default:
                     System.out.println(COMMAND_ERROR);
@@ -158,4 +160,24 @@ public class Main {
         }
         else System.out.println(BOOK_EMPTY);
     }
+
+    private static void getContactName(Scanner in, ContactBook cBook){
+        int phone;
+        phone = in.nextInt(); in.nextLine();
+        if (cBook.hasPhoneNumber(phone)) {
+            System.out.println(cBook.getContactName(phone));
+        }
+        else System.out.println(PHONE_NOT_EXISTS);
+
+    }
+
+    private static void checkRepeated(ContactBook cBook){
+        if (cBook.findMatch())
+            System.out.println(FOUND_EQUAL);
+        else System.out.println(ALL_DIFFERENT);
+    }
+
+
+
+
 }

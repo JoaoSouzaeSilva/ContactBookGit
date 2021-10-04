@@ -60,6 +60,19 @@ public class ContactBook {
         contacts[searchIndex(name)].setEmail(email);
     }
 
+    private int searchIndexN(int phone) {
+        int i = 0;
+        int result = -1;
+        boolean found = false;
+        while (i<counter && !found)
+            if (contacts[i].getPhone() == (phone))
+                found = true;
+            else
+                i++;
+        if (found) result = i;
+        return result;
+    }
+
     private int searchIndex(String name) {
         int i = 0;
         int result = -1;
@@ -72,6 +85,7 @@ public class ContactBook {
         if (found) result = i;
         return result;
     }
+
 
     private void resize() {
         Contact tmp[] = new Contact[2*contacts.length];
@@ -93,4 +107,27 @@ public class ContactBook {
         return contacts[currentContact++];
     }
 
+    public boolean hasPhoneNumber(int phone) {
+        return searchIndexN(phone) >= 0;
+    }
+
+    public String getContactName(int phone) {
+        String n = null;
+        boolean found = false;
+        for(int i = 0; i < counter; i++)
+            if(contacts[i].getPhone() == phone)
+                n = contacts[i].getName();
+        return n;
+    }
+
+    public boolean findMatch(){
+        Contact toCompare = null;
+        int i = 0;
+        for(i = 0; i < counter; i++)
+            toCompare = contacts[i];
+            for( int j = i + 1; j < counter; j++)
+                if(toCompare.getPhone() == contacts[j].getPhone())
+                    return true;
+        return false;
+    }
 }
